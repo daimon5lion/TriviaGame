@@ -43,7 +43,7 @@ $(document).ready(function() {
   var wrongCount = 0;
   var unanswerCount = 0;
   var intervalId;
-  var timer = 10;
+  var timer = 15;
   var yourChoice = "";
   var running = false;
   var qCount = questions.length;
@@ -137,9 +137,9 @@ $(document).ready(function() {
     newArray.push(pick);
     questions.splice(index, 1);
 
-    var hidpic = setTimeout(function() {
+    var timeout = setTimeout(function() {
       $("#asection").empty();
-      timer = 10;
+      timer = 15;
 
       if (wrongCount + rightCount + unanswerCount === qCount) {
         $("#qsection").empty();
@@ -156,7 +156,7 @@ $(document).ready(function() {
         runTimer();
         showQuestions();
       }
-    }, 4000);
+    }, 3000);
   }
 
   $("#resetb").on("click", function() {
