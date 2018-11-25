@@ -1,6 +1,5 @@
 $(document).ready(function() {
   $("#resetb, #winner, #loser, #timeup").hide();
-  $("#opt1, #opt2, #opt3, #opt4").hide();
 
   var questions = [
     {
@@ -59,7 +58,7 @@ $(document).ready(function() {
     showQuestions();
     runTimer();
     for (var i = 0; i < questions.length; i++) {
-      holder.push(quetstions[i]);
+      qholder.push(questions[i]);
     }
   });
 
@@ -83,6 +82,7 @@ $(document).ready(function() {
           "</p>"
       );
       $(".answerchoice").hide();
+      $("#timeup").show();
       finish();
     }
   }
@@ -95,6 +95,7 @@ $(document).ready(function() {
   function showQuestions() {
     index = Math.floor(Math.random() * questions.length);
     pick = questions[index];
+    $("#resetb, #winner, #loser, #timeup").hide();
 
     $("#qsection").html(pick.question);
     for (var i = 0; i < pick.option.length; i++) {
@@ -105,19 +106,16 @@ $(document).ready(function() {
       $("#asection").append(userChoice);
     }
 
-    //////////////////////////////////
-
     $(".answerchoice").on("click", function() {
-      //grab array position from userGuess
       yourChoice = parseInt($(this).attr("data-guessvalue"));
 
-      //correct guess or wrong guess outcomes
       if (yourChoice === pick.answer) {
         stop();
         rightCount++;
         yourChoice = "";
         $("#qsection").html("<p>Correct!</p>");
         $(".answerchoice").hide();
+        $("#winner").show();
         finish();
       } else {
         stop();
@@ -129,6 +127,7 @@ $(document).ready(function() {
             "</p>"
         );
         $(".answerchoice").hide();
+        $("#loser").show();
         finish();
       }
     });
@@ -145,6 +144,7 @@ $(document).ready(function() {
       //run the score screen if all questions answered
       if (wrongCount + rightCount + unanswerCount === qCount) {
         $("#qsection").empty();
+        $("#resetb, #winner, #loser, #timeup").hide();
         $("#qsection").html("<h3>Game Over!  Here's how you did: </h3>");
         $("#asection").append("<h4> Correct: " + rightCount + "</h4>");
         $("#asection").append("<h4> Incorrect: " + wrongCount + "</h4>");
@@ -157,7 +157,7 @@ $(document).ready(function() {
         runTimer();
         showQuestions();
       }
-    }, 3000);
+    }, 4000);
   }
 
   $("#resetb").on("click", function() {

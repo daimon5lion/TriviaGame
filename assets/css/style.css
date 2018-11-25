@@ -42,12 +42,15 @@ h1 {
 }
 
 .answerchoice {
-  border: 1px solid black;
-  border-radius: 5%;
+  border: 1.5px solid black;
+  border-radius: 5px;
   width: 40%;
   color: black;
   text-align: center;
   margin: 10px auto;
   font-size: 20px;
   background-color: white;
+}
+.answerchoice:hover {
+  border: 3px solid rgb(52, 20, 66);
 }
