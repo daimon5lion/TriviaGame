@@ -141,7 +141,6 @@ $(document).ready(function() {
       $("#asection").empty();
       timer = 10;
 
-      //run the score screen if all questions answered
       if (wrongCount + rightCount + unanswerCount === qCount) {
         $("#qsection").empty();
         $("#resetb, #winner, #loser, #timeup").hide();
