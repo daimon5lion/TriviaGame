@@ -43,7 +43,7 @@ $(document).ready(function() {
   var wrongCount = 0;
   var unanswerCount = 0;
   var intervalId;
-  var timer = 15;
+  var timer = 10;
   var yourChoice = "";
   var running = false;
   var qCount = questions.length;
@@ -51,6 +51,7 @@ $(document).ready(function() {
   var index;
   var newArray = [];
   var qholder = [];
+  var timeout;
 
   $("#startb").on("click", function() {
     $("#startb").hide();
@@ -74,16 +75,21 @@ $(document).ready(function() {
     timer--;
     if (timer === 0) {
       unanswerCount++;
-      stop();
-      //$("#tremain").hide();
-      $("#qsection").html(
-        "<p>Your time is up! The correct answer is:" +
-          pick.option[pick.answer] +
-          "</p>"
-      );
-      $(".answerchoice").hide();
-      $("#timeup").show();
-      finish();
+      //stop();
+      //
+
+      setTimeout(function() {
+        $("#qsection").html(
+          "<p>Your time is up! The correct answer is:" +
+            pick.option[pick.answer] +
+            "</p>"
+        );
+        $("#tremain").hide();
+        stop();
+        $(".answerchoice").hide();
+        $("#timeup").show();
+        finish();
+      }, 1800);
     }
   }
 
@@ -93,6 +99,7 @@ $(document).ready(function() {
   }
 
   function showQuestions() {
+    $("#tremain").show();
     index = Math.floor(Math.random() * questions.length);
     pick = questions[index];
     $("#resetb, #winner, #loser, #timeup").hide();
@@ -137,9 +144,9 @@ $(document).ready(function() {
     newArray.push(pick);
     questions.splice(index, 1);
 
-    var timeout = setTimeout(function() {
+    timeout2 = setTimeout(function() {
       $("#asection").empty();
-      timer = 15;
+      timer = 10;
 
       if (wrongCount + rightCount + unanswerCount === qCount) {
         $("#qsection").empty();
