@@ -99,7 +99,10 @@ $(document).ready(function() {
   }
 
   function showQuestions() {
-    $("#tremain").show();
+    setTimeout(function() {
+      $("#tremain").show();
+    }, 1000);
+    runTimer();
     index = Math.floor(Math.random() * questions.length);
     pick = questions[index];
     $("#resetb, #winner, #loser, #timeup").hide();
@@ -123,6 +126,7 @@ $(document).ready(function() {
         $("#qsection").html("<p>Correct!</p>");
         $(".answerchoice").hide();
         $("#winner").show();
+        $("#tremain").hide();
         finish();
       } else {
         stop();
@@ -135,6 +139,7 @@ $(document).ready(function() {
         );
         $(".answerchoice").hide();
         $("#loser").show();
+        $("#tremain").hide();
         finish();
       }
     });
@@ -160,7 +165,6 @@ $(document).ready(function() {
         wrongCount = 0;
         unanswerCount = 0;
       } else {
-        runTimer();
         showQuestions();
       }
     }, 3000);
